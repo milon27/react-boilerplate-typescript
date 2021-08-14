@@ -5,9 +5,10 @@ import URL from './../../utils/URL';
 import useLocalStorage from './../../utils/hooks/useLocalStorage';
 import Define from './../../utils/Define';
 import User from '../../utils/models/User';
+import { TypeReactChild } from '../../utils/interface/CommonInterface';
 
 
-export default function ProtectedPage(props: { children: React.ReactChild }) {
+export default function ProtectedPage(props: { children: TypeReactChild }) {
     const [user, setUser] = useLocalStorage<User>(Define.AUTH_KEY)
 
 

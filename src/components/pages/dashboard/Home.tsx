@@ -5,9 +5,7 @@ import Main from '../../layouts/dashboard/Main'
 const Home = () => {
     return (
         <Main title="Home Page">
-            <>
-                home
-            </>
+            Home....
         </Main>
     )
 }

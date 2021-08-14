@@ -4,6 +4,7 @@ import URL from './../../utils/URL';
 import useLocalStorage from './../../utils/hooks/useLocalStorage';
 import User from './../../utils/models/User';
 import Define from '../../utils/Define';
+import { TypeClickEvent } from '../../utils/interface/CommonInterface';
 
 interface HeaderType {
     title: string
@@ -16,7 +17,7 @@ const Header = ({ title }: HeaderType) => {
     //const { authDispatch } = useContext(null)
     const [user, setUser] = useLocalStorage<User>(Define.AUTH_KEY)
 
-    const logout = async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const logout = async (e: TypeClickEvent) => {
         //await new AuthAction(authDispatch).Logout()
         history.push(URL.LOGIN)
     }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { TypeSetState } from '../interface/CommonInterface';
 
 /**
  * const [user,setUser]=useLocalStorage('user',{})
@@ -31,7 +32,7 @@ const [u, setu] = useLocalStorage<Py>("key")
 const PREFIX = "MLS-"
 
 
-export default function useLocalStorage<T>(key: string, initValue: T | null = null): [T | null, React.Dispatch<React.SetStateAction<T | null>>] {
+export default function useLocalStorage<T>(key: string, initValue: T | null = null): [T | null, TypeSetState<T | null>] {
     const prefixed_key = PREFIX + key
 
     const [state, setstate] = useState<T | null>(() => {

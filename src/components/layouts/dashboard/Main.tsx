@@ -2,10 +2,11 @@ import React from 'react'
 import ContentWrapper from './ContentWrapper'
 import Sidebar from './Sidebar'
 import LogoutModal from './LogoutModal';
+import { TypeReactChild } from '../../../utils/interface/CommonInterface';
 
 export interface iMain {
     title: string,
-    children: React.ReactChild
+    children: TypeReactChild
 }
 
 export default function Main({ children, title }: iMain) {
