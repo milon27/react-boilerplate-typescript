@@ -1,11 +1,16 @@
+import Router from "./components/routers/Router";
+import axios from 'axios'
+import Define from './utils/Define';
 
+//setup axios
+axios.defaults.baseURL = Define.API_BASE_URL
+axios.defaults.withCredentials = true
 
-function App() {
+export default function App() {
+
   return (
     <div>
-
+      <Router />
     </div>
-  );
+  )
 }
-
-export default App;
