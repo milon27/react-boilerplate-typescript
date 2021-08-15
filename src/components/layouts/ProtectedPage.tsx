@@ -10,24 +10,35 @@ import { TypeReactChild } from '../../utils/interface/CommonInterface';
 
 export default function ProtectedPage(props: { children: TypeReactChild }) {
     const [user, setUser] = useLocalStorage<User>(Define.AUTH_KEY)
+    //console.log(user)
 
 
     const [authv, setAuthV] = useState(false)
     const [loading, setLoading] = useState(true)
     useEffect(() => {
+        let run = true
+
         const ckLog = async () => {
             try {
                 const ck = await axios.get('auth/is-loggedin')
                 //give true or false
-                if (!ck.data) {
-                    //so clear the localStorage
-                    setUser(null)
-                    setAuthV(false)
-                } else {
-                    setAuthV(true)
+                if (run) {
+                    if (!ck.data) {
+                        //so clear the localStorage
+                        setUser(null)
+                        setAuthV(false)
+                    } else {
+                        //cookie available,ck local storage
+                        if (user?.id) {
+                            setAuthV(true)
+                        } else {
+                            //local data not available
+                            setUser(null)
+                            setAuthV(false)
+                        }
+                    }
+                    setLoading(false)
                 }
-                setLoading(false)
-
             } catch (e) {
                 //so clear the localStorage
                 setUser(null)
@@ -36,7 +47,16 @@ export default function ProtectedPage(props: { children: TypeReactChild }) {
                 setLoading(false)
             }
         }
-        ckLog()
+
+        if (run) {
+            console.log("inside run...")
+            ckLog()
+        }
+
+        return () => {
+            console.log("unmounted...")
+            run = false
+        }
     }, [loading])
 
 

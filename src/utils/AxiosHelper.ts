@@ -3,10 +3,13 @@ import { ResponseObject, iResponseObject } from './models/Response';
 
 const AxiosHelper = {
 
+    simpleGet: (url: string) => {
+        return axios.get(`${url}`)
+    },
+
     getSource: () => {
         return axios.CancelToken.source()
     }, //return token to cancel the request
-
 
     //get the object 
     getData: <T>(url: string, source: CancelTokenSource): Promise<iResponseObject<T>> => {
@@ -16,11 +19,11 @@ const AxiosHelper = {
                     cancelToken: source.token,
                 })
                 .then((res) => {
-                    const { error, message, data } = res.data;
+                    const { error, message, response } = res.data;
                     if (error === false) {
                         //no error
                         resolve(
-                            ResponseObject(true, "success" + message, data)
+                            ResponseObject(true, "success" + message, response)
                         );
                     } else {
                         resolve(
@@ -43,16 +46,16 @@ const AxiosHelper = {
         });
     },//get end 
 
-    addData: <T>(url: string, newdata: T): Promise<iResponseObject<T>> => {
+    addData: <T>(url: string, newdata: T | any): Promise<iResponseObject<T>> => {
         return new Promise((resolve, reject) => {
             axios
                 .post(url, newdata)
                 .then((res) => {
-                    const { error, message, data } = res.data;
+                    const { error, message, response } = res.data;
                     if (error === false) {
                         //no error
                         resolve(
-                            ResponseObject(true, "success-" + message, data)
+                            ResponseObject(true, "success-" + message, response)
                         );
                     } else {
                         //error
@@ -70,12 +73,12 @@ const AxiosHelper = {
         });
     }, //end add data
 
-    updateData: <T>(url: string, updateData: T): Promise<iResponseObject<T>> => {
+    updateData: <T>(url: string, updateData: T | any): Promise<iResponseObject<T>> => {
         return new Promise((resolve, reject) => {
             axios.put(url, updateData).then((res) => {
-                const { error, message, data } = res.data
+                const { error, message, response } = res.data
                 if (error === false) {
-                    resolve(ResponseObject(true, "update success-" + message, data));
+                    resolve(ResponseObject(true, "update success-" + message, response));
                 } else {
                     resolve(
                         ResponseObject(false, "failed-" + message)
@@ -93,7 +96,7 @@ const AxiosHelper = {
     deleteData: (url: string): Promise<iResponseObject<any>> => {
         return new Promise((resolve, reject) => {
             axios.delete(url).then((res) => {
-                const { error, message, data } = res.data
+                const { error, message, response } = res.data
                 if (error === false) {
                     resolve(ResponseObject(true, "delete succes" + message));
                 } else {

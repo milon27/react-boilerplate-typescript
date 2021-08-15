@@ -4,6 +4,7 @@ import useLocalStorage from './../../utils/hooks/useLocalStorage';
 import User from './../../utils/models/User';
 import Define from '../../utils/Define';
 import { TypeClickEvent } from '../../utils/interface/CommonInterface';
+import AxiosHelper from './../../utils/AxiosHelper';
 
 interface iHeaderType {
     title: string
@@ -13,11 +14,14 @@ interface iHeaderType {
 
 const Header = ({ title }: iHeaderType) => {
     const history = useHistory()
-    //const { authDispatch } = useContext(null)
+
     const [user, setUser] = useLocalStorage<User>(Define.AUTH_KEY)
 
     const logout = async (e: TypeClickEvent) => {
-        //await new AuthAction(authDispatch).Logout()
+        //clear cookie
+        await AxiosHelper.simpleGet('auth/logout')
+        //clear localstate/storage
+        setUser(null)
         history.push(URL.LOGIN)
     }
 
