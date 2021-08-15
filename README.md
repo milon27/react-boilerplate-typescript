@@ -20,7 +20,7 @@ setp 4: make your dream project.
 
 > Screenshot
 
-![screenshot](screenshot.png)
+![screenshot](Screenshot.png)
 
 ---
 ## Author @ milon27
