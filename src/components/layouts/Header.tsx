@@ -1,4 +1,3 @@
-import React, { useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import URL from './../../utils/URL';
 import useLocalStorage from './../../utils/hooks/useLocalStorage';
@@ -6,13 +5,13 @@ import User from './../../utils/models/User';
 import Define from '../../utils/Define';
 import { TypeClickEvent } from '../../utils/interface/CommonInterface';
 
-interface HeaderType {
+interface iHeaderType {
     title: string
 }
 
 //todo : auth action / logout option
 
-const Header = ({ title }: HeaderType) => {
+const Header = ({ title }: iHeaderType) => {
     const history = useHistory()
     //const { authDispatch } = useContext(null)
     const [user, setUser] = useLocalStorage<User>(Define.AUTH_KEY)

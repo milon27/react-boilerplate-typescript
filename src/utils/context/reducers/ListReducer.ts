@@ -1,17 +1,16 @@
-import React from 'react'
 import Types from './../actions/Types';
 
-export interface iListAction {
+export interface iListAction<T> {
     type: Types,
     payload: {
-        arr?: any[],
-        obj?: any
-        id_field?: string,
-        id_value?: number
+        arr?: T[],
+        obj?: T
+        id_field?: string
     }
 }
 
-const ListReducer: React.Reducer<any[], iListAction> = (state: any[], action: iListAction) => {
+
+const ListReducer = <T>(state: T[], action: iListAction<T>) => {
     switch (action.type) {
         case Types.GET_DATA:
             return [...action.payload.arr!]; //return an array
@@ -28,13 +27,15 @@ const ListReducer: React.Reducer<any[], iListAction> = (state: any[], action: iL
              *      }
              * })
              */
-            console.log(action.payload.id_field, action.payload.obj);
-            return state.map(itm => {
+
+            return state.map((itm: any) => {
                 const id_field = action.payload.id_field
-                if (itm[id_field!] === action.payload.obj[id_field!])
-                    return action.payload.obj;
-                else
+                const obj = action.payload.obj as any
+                if (itm[id_field!] === obj[id_field!]) {
+                    return obj;
+                } else {
                     return itm;
+                }
             });//return array with updated object
 
         // return state.filter((updateData) => {
@@ -46,13 +47,15 @@ const ListReducer: React.Reducer<any[], iListAction> = (state: any[], action: iL
              *      type:Types.DELETE_DATA
              *      payload:{
              *          id_field:"id",
-             *          id_value:2
+             *          obj:{}//which will be deleted
              *      }
              * })
              */
 
-            return state.filter((Deletedata) => {
-                return Deletedata[action.payload.id_field!] === action.payload.id_value
+            return state.filter((Deletedata: any) => {
+                const id_field = action.payload.id_field
+                const obj = action.payload.obj as any
+                return Deletedata[id_field!] === obj[id_field!]
             });
         default:
             return state; //default arry

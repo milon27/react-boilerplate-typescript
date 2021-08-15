@@ -2,16 +2,17 @@ export enum ColorType {
     DANGER = "danger", SUCCESS = "success", PRIMARY = "primary", INFO = "info", NONE = ""
 }
 
-export interface iResponse<Type extends any = {}> {
+export interface iResponse {
     success: boolean
-    title: string
-    desc: string
+    message: string
     type: ColorType
-    object: Type | any
 }
 
-const Response = <Type extends any = {}>({ success, title, desc, type, object }: iResponse<Type>) => {
-    return { success: success, title: title, desc: desc, type: type, object: object }
+const Response = (success: boolean, message: string, type: ColorType) => {
+    return { success: success, message: message, type: type }
 }
 
+// const MyResponse = (success: boolean, title: string, desc: string, type: ColorType, object?: any) => {
+//     return { success, title, desc, type, object: object || {} }
+// }
 export default Response;

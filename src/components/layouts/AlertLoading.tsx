@@ -6,12 +6,11 @@ import { DispatchContext, StateContext } from './../../utils/context/MainContext
 import AppAction from './../../utils/context/actions/AppAction';
 
 
-interface _AlertLoading { loadColor: ColorType }
+interface iAlertLoading { loadColor: ColorType }
 
-export default function AlertLoading({ loadColor }: _AlertLoading) {
+export default function AlertLoading({ loadColor }: iAlertLoading) {
 
     const { app } = useContext(StateContext)
-
     const { appDispatch } = useContext(DispatchContext);
 
     const removeResponse = () => {
@@ -26,10 +25,7 @@ export default function AlertLoading({ loadColor }: _AlertLoading) {
                 {app?.loading ? <Spinner animation="border" variant={loadColor} /> : <></>}
                 {app?.response?.type ? <>
                     <Alert variant={app?.response?.type} onClose={removeResponse} dismissible>
-                        <Alert.Heading>{app?.response?.title}</Alert.Heading>
-                        <p>
-                            {app?.response?.desc}
-                        </p>
+                        <Alert.Heading>{app?.response?.message}</Alert.Heading>
                     </Alert>
                 </> : <></>}
             </div>

@@ -1,9 +1,9 @@
 import React from 'react'
-interface AppI {
+interface iApp {
     ob: number
 }
 
-const Demo: React.FC<AppI> = () => {
+const Demo: React.FC<iApp> = () => {
     return (
         <div>
 

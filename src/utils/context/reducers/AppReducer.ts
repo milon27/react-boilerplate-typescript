@@ -1,4 +1,4 @@
-import Response, { iResponse } from "../../models/Response";
+import { iResponse } from "../../models/Response";
 import Types from './../actions/Types';
 import { iAppState } from './../../models/AppState';
 import { Reducer } from "react";
