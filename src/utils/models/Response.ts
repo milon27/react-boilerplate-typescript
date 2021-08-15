@@ -12,7 +12,15 @@ const Response = (success: boolean, message: string, type: ColorType) => {
     return { success: success, message: message, type: type }
 }
 
-// const MyResponse = (success: boolean, title: string, desc: string, type: ColorType, object?: any) => {
-//     return { success, title, desc, type, object: object || {} }
-// }
+
+export interface iResponseObject<T> {
+    success: boolean
+    message: string
+    obj?: T
+}
+export const ResponseObject = <T>(success: boolean, message: string, obj: any = null): iResponseObject<T> => {
+    return { success: success, message: message, obj: obj }
+}
+
+
 export default Response;

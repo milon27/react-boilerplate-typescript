@@ -1,23 +1,24 @@
 import axios, { CancelTokenSource } from "axios";
 import { iListAction } from "../reducers/ListReducer";
 import Types from "./Types";
-import Response, { ColorType } from './../../models/Response';
+import Response, { ColorType, iResponse } from './../../models/Response';
 
 
 
 class ListAction<T> {
     dispatch: React.Dispatch<iListAction<T>>
     source: CancelTokenSource = axios.CancelToken.source()
+
     constructor(dispatch: React.Dispatch<iListAction<T>>) {
         this.dispatch = dispatch;
     }
-    getSource = () => {
+    getSource = (): CancelTokenSource => {
         this.source = axios.CancelToken.source();
         return this.source;
     }; //return token to cancel the request
 
     //get all data
-    getAll = async (url: string) => {
+    getAll = async (url: string): Promise<iResponse> => {
         return new Promise((resolve, reject) => {
             axios
                 .get(`${url}`, {
@@ -64,7 +65,7 @@ class ListAction<T> {
                 });
         });
     }; //end get all(make sure you got a response (object type) )
-    addData = (url: string, newdata: T) => {
+    addData = (url: string, newdata: T): Promise<iResponse> => {
         return new Promise((resolve, reject) => {
             axios
                 .post(url, newdata)
@@ -94,7 +95,7 @@ class ListAction<T> {
         });
     }; //end add data
     //id_field=primary key (based on which field item will be identified)
-    updateData = (url: string, updateData: T, id_field: string) => {
+    updateData = (url: string, updateData: T, id_field: string): Promise<iResponse> => {
         return new Promise((resolve, reject) => {
             axios.put(url, updateData).then((res) => {
                 const { error, message, response } = res.data
@@ -120,7 +121,7 @@ class ListAction<T> {
         });
     } //end update data
     // Delete Data
-    deleteData = (url: string, id_field: string, obj: T) => {
+    deleteData = (url: string, id_field: string, obj: T): Promise<iResponse> => {
         return new Promise((resolve, reject) => {
             axios
                 .delete(url)
@@ -132,9 +133,7 @@ class ListAction<T> {
                             type: Types.DELETE_DATA,
                             payload: { id_field: id_field, obj: obj },
                         });
-                        resolve(
-                            resolve(Response(true, "Delete success", ColorType.SUCCESS))
-                        );
+                        resolve(Response(true, "Delete success", ColorType.SUCCESS))
                     } else {
                         console.error("list delete server error: ", message)
                         resolve(Response(false, message, ColorType.DANGER));
