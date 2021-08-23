@@ -12,13 +12,7 @@ enum Types {
     DELETE_DATA = "DELETE_DATA",
     //optional
     DARK_THEME = "DARK_THEME",
-    //payload structure
-    // UPDATE_PAYLOAD: <T>(id_field: string, obj: T) => {
-    //     return {
-    //         obj,
-    //         id_field
-    //     }
-    // }
+
 }
 
 export default Types;

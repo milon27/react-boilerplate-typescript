@@ -12,7 +12,7 @@ export type TypeClickEventHandler = React.MouseEventHandler<HTMLElement> | React
 type FormControlElement = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
 export type TypeOnChangeHandler = React.ChangeEventHandler<FormControlElement>
-export type TypeOnChange = React.ChangeEvent<FormControlElement>
+export type TypeOnChange = React.ChangeEvent<FormControlElement>//not for file
 
 
 

@@ -6,7 +6,7 @@ import { TypeOnChangeHandler } from '../../../utils/interface/CommonInterface';
 
 interface iInput {
     title: string,
-    value: string,
+    value?: string,
     name: string,
     onChange: TypeOnChangeHandler,
     disable: boolean,

@@ -1,5 +1,5 @@
 import { Button, Modal } from 'react-bootstrap'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { TypeClickEventHandler, TypeReactChild, TypeSetState } from '../../../utils/interface/CommonInterface'
 
 
@@ -7,7 +7,7 @@ interface iMyModal {
     title: string,
     children: TypeReactChild,
     show: boolean,
-    setShow: TypeSetState<Boolean>,
+    setShow: TypeSetState<boolean>,
     onSubmit: TypeClickEventHandler
 }
 const MyModal: FC<iMyModal> = ({ title, children, show, setShow, onSubmit }) => {

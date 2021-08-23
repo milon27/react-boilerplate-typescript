@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import { useContext, useState } from "react"
 import AppAction from "../../../utils/context/actions/AppAction"
 import { DispatchContext } from "../../../utils/context/MainContext"
 import { ColorType } from "../../../utils/models/Response"
@@ -14,6 +14,8 @@ import { StateContext } from './../../../utils/context/MainContext';
 import AlertLoading from "../../layouts/AlertLoading";
 import { Button } from "react-bootstrap";
 import { TypeClickEvent, TypeOnChange } from "../../../utils/interface/CommonInterface";
+
+import logo from '../../../assets/img/logo.svg'
 
 const Login = () => {
 
@@ -73,7 +75,7 @@ const Login = () => {
                 <div className="inner">
                     <div className="d-flex flex-column">
                         <div className="d-flex justify-content-center mb-2">
-                            {/* <img src={logo} width={50} alt="" /> */}
+                            <img src={logo} width={'30%'} alt="" />
                         </div>
                         <div className="d-flex justify-content-center">
                             <h3>Sign In as a Client</h3>

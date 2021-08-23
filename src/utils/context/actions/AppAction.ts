@@ -25,6 +25,11 @@ class AppAction {
             type: Types.SET_RESPONSE,
             payload: response
         });
+        setTimeout(() => {
+            this.dispatch({
+                type: Types.REMOVE_RESPONSE,
+            });
+        }, 4000)
     }
     REMOVE_RESPONSE = () => {
         this.dispatch({

@@ -7,28 +7,28 @@ import Response, { ColorType, iResponse } from './../../models/Response';
 
 class ListAction<T> {
     dispatch: React.Dispatch<iListAction<T>>
-    source: CancelTokenSource = axios.CancelToken.source()
+    // source: CancelTokenSource = axios.CancelToken.source()
 
     constructor(dispatch: React.Dispatch<iListAction<T>>) {
         this.dispatch = dispatch;
     }
-    getSource = (): CancelTokenSource => {
-        this.source = axios.CancelToken.source();
-        return this.source;
+    static getSource = (): CancelTokenSource => {
+        return axios.CancelToken.source();
     }; //return token to cancel the request
 
     //get all data
-    getAll = async (url: string): Promise<iResponse> => {
+    getAll = async (url: string, source: CancelTokenSource): Promise<iResponse> => {
         return new Promise((resolve, reject) => {
             axios
                 .get(`${url}`, {
-                    cancelToken: this.source.token,
+                    cancelToken: source.token,
                 })
                 .then((res) => {
                     const { error, message, response } = res.data;
                     if (error === false) {
                         //no error
                         //dispatch the global state
+                        // console.log("get all res-: ", response)
                         this.dispatch({
                             type: Types.GET_DATA,
                             payload: {
@@ -67,6 +67,7 @@ class ListAction<T> {
     }; //end get all(make sure you got a response (object type) )
     addData = (url: string, newdata: T): Promise<iResponse> => {
         return new Promise((resolve, reject) => {
+
             axios
                 .post(url, newdata)
                 .then((res) => {
@@ -76,7 +77,9 @@ class ListAction<T> {
                         //dispatch the global state
                         this.dispatch({
                             type: Types.ADD_DATA,
-                            payload: response, //a newly created object
+                            payload: {
+                                obj: response
+                            }, //a newly created object
                         });
 
                         resolve(
@@ -99,14 +102,14 @@ class ListAction<T> {
         return new Promise((resolve, reject) => {
             axios.put(url, updateData).then((res) => {
                 const { error, message, response } = res.data
-                // console.log("after update: ", res.data);
+                console.log("after update: ", res.data);
                 if (error === false) {
                     //dispatch the global state
                     this.dispatch({
                         type: Types.UPDATE_DATA,
                         payload: {
                             id_field: id_field,
-                            obj: updateData
+                            obj: response
                         }
                     });
                     resolve(Response(true, "update success", ColorType.SUCCESS));
@@ -121,10 +124,12 @@ class ListAction<T> {
         });
     } //end update data
     // Delete Data
-    deleteData = (url: string, id_field: string, obj: T): Promise<iResponse> => {
+    deleteData = (url: string, id_field: string, obj: T, body?: object): Promise<iResponse> => {
         return new Promise((resolve, reject) => {
             axios
-                .delete(url)
+                .delete(url, {
+                    data: body
+                })
                 .then((res) => {
                     const { error, message, response } = res.data;
                     if (error === false) {

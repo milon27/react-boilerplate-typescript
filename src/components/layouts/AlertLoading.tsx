@@ -18,6 +18,19 @@ export default function AlertLoading({ loadColor }: iAlertLoading) {
     }
 
 
+    /**
+     * use case: in onsubmit
+     *  const myapp = new AppAction(appDispatch!)
+        myapp.START_LOADING()
+        setShow(false)
+        const result = await new ListAction<Page>(pagelistDispatch!).addData('client/create-page/', page)
+        myapp.SET_RESPONSE(result)
+        myapp.STOP_LOADING()
+     * 
+    //in jsx
+     <AlertLoading loadColor={ColorType.INFO} />
+     */
+
 
     return (
         <Col xs={12} className="d-flex justify-content-center mb-3" >
