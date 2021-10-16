@@ -75,14 +75,14 @@ const Login = () => {
             <Container className="vh-100 d-flex justify-content-center align-items-center">
                 <Row className="d-flex justify-content-center">
                     <Col md={5} className="d-flex align-items-center ">
-                        <img className="mb-3 w-100 rounded hide-mobile" src='/img/auth/login.jpg' alt="" />
+                        <img className="mb-3 w-100 rounded hide-mobile" src='/img/auth/login.png' alt="" />
                     </Col>
                     <Col md={5} className="d-flex align-items-center">
 
                         <div className="w-100">
                             <div className="w-100 text-center">
-                                <img className="mb-3" style={{ width: "20%" }} src='/img/logo/logo.png' alt="" />
-                                <h2 className="text-primary"><b>Welcome To Mess Manager</b></h2>
+                                {/* <img className="mb-3" style={{ width: "20%" }} src='/img/logo/logo.png' alt="" /> */}
+                                <h2 className="text-primary"><b>Welcome </b></h2>
                                 <h4>Login Now</h4>
                             </div>
 
