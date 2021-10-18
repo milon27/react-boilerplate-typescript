@@ -2,7 +2,8 @@ import { createContext, useReducer, FC } from 'react'
 import AppReducer, { iAppAction } from './reducers/AppReducer';
 import AppState, { iAppState } from './../models/AppState';
 import { iMyMeal } from './../models/mess/MyMeal';
-import ListReducer, { iListAction } from './reducers/ListReducer';
+import { iListAction } from './reducers/ListReducer';
+import getListReducer from './reducers/ListReducer';
 
 
 interface iState {
@@ -21,7 +22,7 @@ export const DispatchContext = createContext({} as iDispatch)
 const MainContext: FC = ({ children }) => {
 
     const [app, appDispatch] = useReducer(AppReducer, AppState({} as iAppState))//for app state
-    const [meals, mealsDispatch] = useReducer(ListReducer, []);//for any kind of list
+    const [meals, mealsDispatch] = useReducer(getListReducer<iMyMeal>(), []);//for any kind of list
 
     const global_state: iState = {
         app, meals

@@ -27,7 +27,7 @@ export type iListAction<T> = iGetPayload<T> | iAddPayload<T> | iUpdateDeletePayl
 // }
 
 //state: iListState<T>, action: iListAction<T>
-const ListReducer = <T>(state: T[], action: iListAction<T>) => {
+const ListReducer = <T>() => (state: T[], action: iListAction<T>): T[] => {
     switch (action.type) {
         case Types.GET_DATA:
             return [...action.payload]; //return an array
@@ -101,4 +101,6 @@ const ListReducer = <T>(state: T[], action: iListAction<T>) => {
 //     payload: 1
 // })
 
-export default ListReducer;
+const getListReducer = <T>() => ListReducer<T>()
+
+export default getListReducer;

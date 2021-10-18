@@ -43,7 +43,7 @@ const AxiosHelper = {
     addData: <T>(url: string, newdata: T | any): Promise<iApiResponse<T>> => {
         return new Promise((resolve, reject) => {
             axios
-                .post(url, newdata)
+                .post<iApiResponse<T>>(url, newdata)
                 .then((res) => {
                     const { error, message, response } = res.data;
                     if (error === false) {
@@ -65,7 +65,7 @@ const AxiosHelper = {
 
     updateData: <T>(url: string, updateData: T | any): Promise<iApiResponse<T>> => {
         return new Promise((resolve, reject) => {
-            axios.put(url, updateData).then((res) => {
+            axios.put<iApiResponse<T>>(url, updateData).then((res) => {
                 const { error, message, response } = res.data
                 if (error === false) {
                     resolve(ApiResponse(false, "update success-" + message, response));
